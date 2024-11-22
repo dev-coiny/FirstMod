@@ -1,6 +1,21 @@
 {
+  "item.firstmod.chisel": "Chisel",
+
   "item.firstmod.alexandrite": "Alexandrite",
   "item.firstmod.raw_alexandrite": "Raw Alexandrite",
+  "item.firstmod.kohlrabi": "Kohlrabi",
+  "item.firstmod.aurora_ashes": "Aurora Ashes",
+
   "block.firstmod.alexandrite_block": "Block of Alexandrite",
-  "block.firstmod.raw_alexandrite_block": "Block of Raw Alexandrite"
+  "block.firstmod.raw_alexandrite_block": "Block of Raw Alexandrite",
+  "block.firstmod.alexandrite_ore": "Alexandrite Ore",
+  "block.firstmod.alexandrite_deepslate_ore": "Alexandrite Deepslate Ore",
+  "block.firstmod.magic_block": "Magic Block",
+
+  "creativetab.firstmod.alexandrite_items": "Alexandrite Items",
+  "creativetab.firstmod.alexandrite_blocks": "Alexandrite Blocks",
+
+  "tooltip.firstmod.magic_block": "This magical Block can convert §ccertain§r Items...",
+  "tooltip.firstmod.chisel" : "Press §eShift§r for more Information",
+  "tooltip.firstmod.shift_down" : "This Chisel can convert certain Blocks"
 }

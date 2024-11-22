@@ -1,6 +1,7 @@
 package ch.coiny.firstmod;
 
 import ch.coiny.firstmod.block.ModBlocks;
+import ch.coiny.firstmod.item.ModCreativeModeTabs;
 import ch.coiny.firstmod.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -35,6 +36,8 @@ public class FirstMod
         modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        ModCreativeModeTabs.register(modEventBus);
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
