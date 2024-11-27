@@ -25,6 +25,16 @@ public static final RegistryObject<CreativeModeTab> ALEXANDRITE_ITEMS_TAB = CREA
                     output.accept(ModItems.AURORA_ASHES.get());
 
                     output.accept(ModItems.CHISEL.get());
+                    output.accept(ModItems.SWORD_OF_ALEXANDER.get());
+                    output.accept(ModItems.BOOK_OF_ALEXANDER.get());
+                    output.accept(ModItems.MAGIC_STAFF.get());
+                    output.accept(ModItems.SOUL_LANTERN.get());
+
+                    output.accept(ModItems.ALEXANDRITE_AXE.get());
+                    output.accept(ModItems.ALEXANDRITE_SWORD.get());
+                    output.accept(ModItems.ALEXANDRITE_PICKAXE.get());
+                    output.accept(ModItems.ALEXANDRITE_SHOVEL.get());
+                    output.accept(ModItems.ALEXANDRITE_HOE.get());
                 }).build());
 
 public static final RegistryObject<CreativeModeTab> ALEXANDRITE_BLOCKS_TAB = CREATIVE_MODE_TABS.register("alexandrite_blocks_tab",
@@ -35,9 +45,26 @@ public static final RegistryObject<CreativeModeTab> ALEXANDRITE_BLOCKS_TAB = CRE
                 .displayItems((itemDisplayParameters, output) -> {
                     output.accept(ModBlocks.ALEXANDRITE_BLOCK.get());
                     output.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK.get());
+
                     output.accept(ModBlocks.ALEXANDRITE_ORE.get());
                     output.accept(ModBlocks.ALEXANDRITE_DEEPSLATE_ORE.get());
+
                     output.accept(ModBlocks.MAGIC_BLOCK.get());
+
+                    output.accept(ModBlocks.ALEXANDRITE_STAIRS.get());
+                    output.accept(ModBlocks.ALEXANDRITE_SLAB.get());
+
+                    output.accept(ModBlocks.ALEXANDRITE_PRESSURE_PLATE.get());
+                    output.accept(ModBlocks.ALEXANDRITE_BUTTON.get());
+
+                    output.accept(ModBlocks.ALEXANDRITE_FENCE.get());
+                    output.accept(ModBlocks.ALEXANDRITE_FENCE_GATE.get());
+                    output.accept(ModBlocks.ALEXANDRITE_WALL.get());
+
+                    output.accept(ModBlocks.ALEXANDRITE_DOOR.get());
+                    output.accept(ModBlocks.ALEXANDRITE_TRAPDOOR.get());
+
+                    output.accept(ModBlocks.ALEXANDRITE_LAMP.get());
                 }).build());
 
     public static void register(IEventBus eventBus){

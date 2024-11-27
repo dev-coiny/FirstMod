@@ -1,21 +1,43 @@
 {
   "item.firstmod.chisel": "Chisel",
+  "item.firstmod.sword_of_alexander": "Sword of Alexander",
+  "item.firstmod.book_of_alexander": "Book of Alexander",
 
   "item.firstmod.alexandrite": "Alexandrite",
   "item.firstmod.raw_alexandrite": "Raw Alexandrite",
   "item.firstmod.kohlrabi": "Kohlrabi",
   "item.firstmod.aurora_ashes": "Aurora Ashes",
 
+  "item.firstmod.alexandrite_sword": "Alexandrite Sword",
+  "item.firstmod.alexandrite_pickaxe": "Alexandrite Pickaxe",
+  "item.firstmod.alexandrite_shovel": "Alexandrite Shovel",
+  "item.firstmod.alexandrite_axe": "Alexandrite Axe",
+  "item.firstmod.alexandrite_hoe": "Alexandrite Hoe",
+
   "block.firstmod.alexandrite_block": "Block of Alexandrite",
   "block.firstmod.raw_alexandrite_block": "Block of Raw Alexandrite",
   "block.firstmod.alexandrite_ore": "Alexandrite Ore",
   "block.firstmod.alexandrite_deepslate_ore": "Alexandrite Deepslate Ore",
   "block.firstmod.magic_block": "Magic Block",
+  "block.firstmod.alexandrite_lamp": "Alexandrite Lamp",
+
+  "block.firstmod.alexandrite_stairs": "Alexandrite Stairs",
+  "block.firstmod.alexandrite_slab": "Alexandrite Slab",
+
+  "block.firstmod.alexandrite_button": "Alexandrite Button",
+  "block.firstmod.alexandrite_pressure_plate": "Alexandrite Pressure Plate",
+
+  "block.firstmod.alexandrite_fence": "Alexandrite Fence",
+  "block.firstmod.alexandrite_fence_gate": "Alexandrite Fence Gate",
+  "block.firstmod.alexandrite_wall": "Alexandrite Wall",
+
+  "block.firstmod.alexandrite_door": "Alexandrite Door",
+  "block.firstmod.alexandrite_trapdoor": "Alexandrite Trapdoor",
 
   "creativetab.firstmod.alexandrite_items": "Alexandrite Items",
   "creativetab.firstmod.alexandrite_blocks": "Alexandrite Blocks",
 
   "tooltip.firstmod.magic_block": "This magical Block can convert §ccertain§r Items...",
-  "tooltip.firstmod.chisel" : "Press §eShift§r for more Information",
-  "tooltip.firstmod.shift_down" : "This Chisel can convert certain Blocks"
+  "tooltip.firstmod.chisel" : "This Chisel can convert certain Blocks",
+  "tooltip.firstmod.shift_up" : "Press §eShift§r for more Information"
 }

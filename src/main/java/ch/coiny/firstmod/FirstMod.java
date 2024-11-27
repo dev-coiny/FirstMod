@@ -1,6 +1,7 @@
 package ch.coiny.firstmod;
 
 import ch.coiny.firstmod.block.ModBlocks;
+import ch.coiny.firstmod.component.ModDataComponentTypes;
 import ch.coiny.firstmod.item.ModCreativeModeTabs;
 import ch.coiny.firstmod.item.ModItems;
 import com.mojang.logging.LogUtils;
@@ -41,6 +42,8 @@ public class FirstMod
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModDataComponentTypes.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
