@@ -1,36 +1,32 @@
 package ch.coiny.firstmod.item.custom;
 
-import java.util.List;
-import java.util.function.Predicate;
-import javax.annotation.Nullable;
-
 import ch.coiny.firstmod.fearbehavior.FearUtils;
+import ch.coiny.firstmod.util.MobTickEventHandler;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class SoulLantern extends ProjectileWeaponItem {
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class EntityFreezer extends ProjectileWeaponItem {
     public static final int MAX_DRAW_DURATION = 20;
     public static final int DEFAULT_RANGE = 15;
 
-    public SoulLantern(Item.Properties pProperties) {
+    public EntityFreezer(Properties pProperties) {
         super(pProperties);
     }
 
@@ -50,46 +46,75 @@ public class SoulLantern extends ProjectileWeaponItem {
     }
 
     private void createShockwave(Level level, Player player, float power) {
-        // Sicherstellen, dass dieser Code nur auf der Server-Seite ausgeführt wird
         if (level.isClientSide()) {
             return;  // Verhindert, dass der Code auf der Client-Seite ausgeführt wird
         }
 
-        // Casten des Levels zu ServerLevel, da wir auf der Server-Seite arbeiten
         ServerLevel serverLevel = (ServerLevel) level;
 
         // Maximale Reichweite der Schockwelle basierend auf dem Power-Wert
         double maxRadius = 3.0 + power * 5.0;
         int particleCount = (int) (400 * (power * 3));  // Anzahl der Partikel in der Schockwelle
 
-        // Generiere Partikel entlang einer zufälligen Verteilung auf der Oberfläche einer Kugel
-        for (int i = 0; i < particleCount; i++) {
+        // Zeit, wie lange die Kugel bestehen soll: 1 Sekunde für Wachstum + 5 Sekunden für Bestehen
+        int growthDuration = 20;  // Dauer des Wachstums in Ticks (1 Sekunde)
+        int maxDuration = 1000;    // Dauer, wie lange die Kugel ihre maximale Größe behält (5 Sekunden)
 
-            // Erzeuge zufällige Richtung auf der Kugeloberfläche
-            double theta = Math.random() * Math.PI;  // Vertikaler Winkel [0, PI]
-            double phi = Math.random() * 2 * Math.PI;  // Horizontaler Winkel [0, 2*PI]
+        // Gesamtzeit, die Partikel erzeugt werden (1 Sekunde Wachstum + 5 Sekunden Stabilität)
+        int totalDuration = growthDuration + maxDuration;
 
-            // Berechne die Position der Partikel auf der Kugeloberfläche
-            double x = player.getX() + maxRadius * Math.sin(theta) * Math.cos(phi);  // X-Position
-            double y = player.getY() + maxRadius * Math.cos(theta);                    // Y-Position
-            double z = player.getZ() + maxRadius * Math.sin(theta) * Math.sin(phi);  // Z-Position
+        // Speichern der ursprünglichen Position des Spielers, um die Schockwelle an diesem Punkt zu behalten
+        double initialX = player.getX();
+        double initialY = player.getY();
+        double initialZ = player.getZ();
 
-            // Alle Spieler im Server-Level erreichen und Partikel für sie erzeugen
-            for (Player otherPlayer : serverLevel.getServer().getPlayerList().getPlayers()) {
-                if (otherPlayer.level() == serverLevel) {  // Überprüfen, ob der Spieler im selben Level ist
-                    // Sende das erste Partikel an alle Clients im selben Level (Welt)
-                    serverLevel.sendParticles(ParticleTypes.SOUL, x, y, z, 0, 0, 0, 0, 0);
-                    // Sende das zweite Partikel an alle Clients im selben Level (Welt)
-                    serverLevel.sendParticles(ParticleTypes.TRIAL_OMEN, x, y, z, 0, 0, 0, 0, 0);
-                    // Sende das zweite Partikel an alle Clients im selben Level (Welt)
-                    serverLevel.sendParticles(ParticleTypes.SCULK_SOUL, x, y, z, 0, 0, 0, 0, 0);
+        final int[] tickCounter = {0};
+
+        // Registrieren eines Event-Handlers, um die Partikel in jedem Tick zu erzeugen
+        MinecraftForge.EVENT_BUS.register(new Object() {
+            @SubscribeEvent
+            public void onServerTick(TickEvent.ServerTickEvent event) {
+                if (tickCounter[0] < totalDuration) {
+                    // Berechne den aktuellen Radius
+                    double currentRadius;
+                    if (tickCounter[0] < growthDuration) {
+                        currentRadius = maxRadius * (tickCounter[0] / (double) growthDuration);
+                    } else {
+                        currentRadius = maxRadius;
+                    }
+
+                    // Generiere Partikel
+                    for (int i = 0; i < particleCount; i++) {
+                        // Erzeuge zufällige Richtung auf der Kugeloberfläche
+                        double theta = Math.random() * Math.PI;  // Vertikaler Winkel [0, PI]
+                        double phi = Math.random() * 2 * Math.PI;  // Horizontaler Winkel [0, 2*PI]
+
+                        // Berechne die Position der Partikel auf der Kugeloberfläche
+                        double x = initialX + currentRadius * Math.sin(theta) * Math.cos(phi);  // X-Position
+                        double y = initialY + currentRadius * Math.cos(theta);                    // Y-Position
+                        double z = initialZ + currentRadius * Math.sin(theta) * Math.sin(phi);  // Z-Position
+
+                        // Alle Spieler im Server-Level erreichen und Partikel für sie erzeugen
+                        for (Player otherPlayer : serverLevel.getServer().getPlayerList().getPlayers()) {
+                            if (otherPlayer.level() == serverLevel) {  // Überprüfen, ob der Spieler im selben Level ist
+                                // Sende Partikel an alle Clients im selben Level (Welt)
+                                serverLevel.sendParticles(ParticleTypes.END_ROD, x, y, z, 0, 0, 0, 0, 0); // Silbrige Partikel
+                            }
+                        }
+                    }
+
+                    // Erhöhe den Tick-Zähler
+                    tickCounter[0]++;
+                } else {
+                    // Entferne den Event-Handler, wenn die Schockwelle abgeschlossen ist
+                    MinecraftForge.EVENT_BUS.unregister(this);
                 }
             }
-        }
-
-        // Optional: Ausgabe zur Bestätigung der Ausführung
-        System.out.println("Schockwelle auf Server-Seite ausgelöst");
+        });
     }
+
+
+
 
 
 
@@ -102,7 +127,7 @@ public class SoulLantern extends ProjectileWeaponItem {
         for (Mob mob : mobs) {
             //mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1)); // Schneller laufen (10 Sekunden)
 
-            FearUtils.makeMobFearPlayer(mob, player, 100);
+            MobTickEventHandler.disableMobTick(mob, 10000);
         }
     }
 

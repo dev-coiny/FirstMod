@@ -4,11 +4,13 @@ import ch.coiny.firstmod.block.ModBlocks;
 import ch.coiny.firstmod.component.ModDataComponentTypes;
 import ch.coiny.firstmod.item.ModCreativeModeTabs;
 import ch.coiny.firstmod.item.ModItems;
+import ch.coiny.firstmod.util.MobTickEventHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,6 +37,9 @@ public class FirstMod
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+
+        MobTickEventHandler.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -86,4 +91,5 @@ public class FirstMod
 
         }
     }
+
 }

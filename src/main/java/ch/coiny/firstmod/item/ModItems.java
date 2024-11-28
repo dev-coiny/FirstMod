@@ -39,6 +39,9 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_LANTERN = ITEMS.register("soul_lantern",
             () -> new SoulLantern(new Item.Properties().durability(128)));
 
+    public static final RegistryObject<Item> ENTITY_FREEZER = ITEMS.register("entity_freezer",
+            () -> new EntityFreezer(new Item.Properties().durability(128)));
+
     public static final RegistryObject<Item> ALEXANDRITE_SWORD = ITEMS.register("alexandrite_sword",
             () -> new SwordItem(ModToolTiers.ALEXANDRITE, new Item.Properties()
                     .attributes(SwordItem.createAttributes(ModToolTiers.ALEXANDRITE, 3, -2.4f))));

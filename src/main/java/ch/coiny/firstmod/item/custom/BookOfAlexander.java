@@ -125,9 +125,6 @@ public class BookOfAlexander extends Item {
 
 
 
-
-
-
     @Override
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         if(Screen.hasShiftDown()){
