@@ -2,15 +2,19 @@ package ch.coiny.firstmod;
 
 import ch.coiny.firstmod.block.ModBlocks;
 import ch.coiny.firstmod.component.ModDataComponentTypes;
+import ch.coiny.firstmod.customhelper.ServerTickHandler;
+import ch.coiny.firstmod.entity.ModEntities;
 import ch.coiny.firstmod.item.ModCreativeModeTabs;
 import ch.coiny.firstmod.item.ModItems;
-import ch.coiny.firstmod.util.MobTickEventHandler;
+import ch.coiny.firstmod.util.EntityTickEventHandler;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +24,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import ch.coiny.firstmod.entity.rendering.RotatingRenderer;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -38,7 +43,8 @@ public class FirstMod
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        MobTickEventHandler.register(modEventBus);
+        EntityTickEventHandler.register(modEventBus);
+        //ServerTickHandler.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -47,6 +53,8 @@ public class FirstMod
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModEntities.register(modEventBus);
 
         ModDataComponentTypes.register(modEventBus);
 
@@ -88,7 +96,7 @@ public class FirstMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
+            EntityRenderers.register(ModEntities.HOURGLASS_PROJECTILE.get(), RotatingRenderer::new);
         }
     }
 

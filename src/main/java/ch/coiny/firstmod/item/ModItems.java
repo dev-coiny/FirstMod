@@ -33,6 +33,9 @@ public class ModItems {
     public static final RegistryObject<Item> BOOK_OF_ALEXANDER = ITEMS.register("book_of_alexander",
             () -> new BookOfAlexander(new Item.Properties().durability(128)));
 
+    public static final RegistryObject<Item> SOUL_CRYSTAL = ITEMS.register("soul_crystal",
+            () -> new SoulCrystal(new Item.Properties().durability(128)));
+
     public static final RegistryObject<Item> MAGIC_STAFF = ITEMS.register("magic_staff",
             () -> new MagicStaff(new Item.Properties().durability(128)));
 
@@ -41,6 +44,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> ENTITY_FREEZER = ITEMS.register("entity_freezer",
             () -> new EntityFreezer(new Item.Properties().durability(128)));
+
+    public static final RegistryObject<Item> HOUR_GLASS = ITEMS.register("hour_glass",
+            () -> new HourGlass(new Item.Properties().durability(128)));
 
     public static final RegistryObject<Item> ALEXANDRITE_SWORD = ITEMS.register("alexandrite_sword",
             () -> new SwordItem(ModToolTiers.ALEXANDRITE, new Item.Properties()
@@ -62,6 +68,18 @@ public class ModItems {
             () -> new HoeItem(ModToolTiers.ALEXANDRITE, new Item.Properties()
                     .attributes(HoeItem.createAttributes(ModToolTiers.ALEXANDRITE, 0, -3.0f))));
 
+    public static final RegistryObject<Item> ALEXANDRITE_HELMET = ITEMS.register("alexandrite_helmet",
+            () -> new ArmorItem(ModArmorMaterials.ALEXANDRITE_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(18))));
+    public static final RegistryObject<Item> ALEXANDRITE_CHESTPLATE = ITEMS.register("alexandrite_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.ALEXANDRITE_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(18))));
+    public static final RegistryObject<Item> ALEXANDRITE_LEGGINGS = ITEMS.register("alexandrite_leggings",
+            () -> new ArmorItem(ModArmorMaterials.ALEXANDRITE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(18))));
+    public static final RegistryObject<Item> ALEXANDRITE_BOOTS = ITEMS.register("alexandrite_boots",
+            () -> new ArmorItem(ModArmorMaterials.ALEXANDRITE_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+                    new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(18))));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

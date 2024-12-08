@@ -27,14 +27,23 @@ public static final RegistryObject<CreativeModeTab> ALEXANDRITE_ITEMS_TAB = CREA
                     output.accept(ModItems.CHISEL.get());
                     output.accept(ModItems.SWORD_OF_ALEXANDER.get());
                     output.accept(ModItems.BOOK_OF_ALEXANDER.get());
+                    output.accept(ModItems.SOUL_CRYSTAL.get());
                     output.accept(ModItems.MAGIC_STAFF.get());
                     output.accept(ModItems.SOUL_LANTERN.get());
+                    output.accept(ModItems.HOUR_GLASS.get());
 
                     output.accept(ModItems.ALEXANDRITE_AXE.get());
                     output.accept(ModItems.ALEXANDRITE_SWORD.get());
                     output.accept(ModItems.ALEXANDRITE_PICKAXE.get());
                     output.accept(ModItems.ALEXANDRITE_SHOVEL.get());
                     output.accept(ModItems.ALEXANDRITE_HOE.get());
+
+
+
+                    output.accept(ModItems.ALEXANDRITE_HELMET.get());
+                    output.accept(ModItems.ALEXANDRITE_CHESTPLATE.get());
+                    output.accept(ModItems.ALEXANDRITE_LEGGINGS.get());
+                    output.accept(ModItems.ALEXANDRITE_BOOTS.get());
                 }).build());
 
 public static final RegistryObject<CreativeModeTab> ALEXANDRITE_BLOCKS_TAB = CREATIVE_MODE_TABS.register("alexandrite_blocks_tab",
